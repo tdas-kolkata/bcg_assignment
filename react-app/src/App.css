@@ -1,0 +1,48 @@
+body{
+  background: rgba(26, 26, 17, 0.904);
+  color: antiquewhite;
+}
+
+::placeholder{
+  color:rgb(219, 197, 197);
+  text-align: center;
+}
+
+button{
+  height: 37px;
+  border-radius: 12px;
+  background: linear-gradient(120deg, mediumseagreen, dodgerblue);
+  border-style: none;
+  color: snow;
+  font-weight: 600;
+}
+
+button:hover{
+  cursor: pointer;
+}
+
+input{
+  border-radius: 5px;
+  background-color: rgb(83, 75, 75);
+  color: whitesmoke;
+  height:20px;
+  border: 1px ridge rgb(247, 238, 238);
+  font-size: 15px;
+  padding:5px
+}
+
+select{
+  border-radius: 5px;
+  background-color: rgb(83, 75, 75);
+  color: whitesmoke;
+  height:30px;
+  border: 1px ridge rgb(247, 238, 238);
+  font-size: 15px;
+  padding:5px;
+  cursor: pointer;
+}
+
+a{
+  color:aliceblue;
+  text-decoration: none;
+}

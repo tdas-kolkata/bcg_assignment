@@ -1,10 +1,10 @@
-from django.db import models
+from django.db import          models
 from django.utils import timezone
 
 # Create your models here.
 
 class client (models.Model):
-    client_id = models.IntegerField(primary_key=True)
+    client_id = models.AutoField(primary_key=True)
     client_name = models.CharField(max_length=50)
     income = models.IntegerField(default=0)
     marialtal_status = models.BooleanField(default=True)
@@ -16,7 +16,7 @@ class client (models.Model):
         return self.client_name
 
 class policy (models.Model):
-    policy_id = models.IntegerField(primary_key=True)
+    policy_id = models.AutoField(primary_key=True)
     date_of_purchase = models.DateField()
     fuel = models.CharField(max_length=5)
     vehicle_segment = models.CharField(max_length=1)
@@ -29,4 +29,4 @@ class policy (models.Model):
     client = models.ForeignKey(client,on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.policy_id
+        return str(self.policy_id)

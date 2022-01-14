@@ -2,3 +2,53 @@ GET http://localhost:8000/api/hello/
 
 ###
 POST http://localhost:8000/api/hello/
+
+###
+GET http://localhost:8000/api/policy/all
+
+###`
+POST http://localhost:8000/api/customer/add/
+
+{
+    "client_name":"Tamal",
+    "income" :156900,
+    "marital_status" : "Y",
+    "gender" :"Male",
+    "region" : "APAC"
+}
+
+###
+POST http://localhost:8000/api/policy/add/
+
+{
+    "purchase_date":"2021-05-20",
+    "fuel" :"CNG",
+    "vehicle_segment" : "B",
+    "premium" :1200,
+    "bodily_injury_liability" : "Y",
+    "personal_injury_protection":"Y",
+    "property_damage_liability":"Y",
+    "collision":"Y",
+    "comprehensive":"Y",
+    "client_id": 14
+}
+
+###
+GET http://localhost:8000/api/policy/1
+
+###
+PUT http://localhost:8000/api/policy/1
+
+{
+    "fuel" :"PETRO",
+    "vehicle_segment" : "C",
+    "premium" :1200,
+    "bodily_injury_liability" : "Y",
+    "personal_injury_protection":"Y",
+    "property_damage_liability":"Y",
+    "collision":"Y",
+    "comprehensive":"Y"
+}
+
+###
+GET http://localhost:8000/api/sales/APAC

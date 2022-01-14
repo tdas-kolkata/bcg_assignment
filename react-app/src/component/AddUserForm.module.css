@@ -1,0 +1,31 @@
+.form {
+  display: grid;
+  width: 40%;
+  padding-left: 30%;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 20px;
+  column-gap: 20px;
+}
+
+.form > label {
+  justify-self: center;
+}
+
+.error , .heading {
+  color: rgb(247, 144, 144);
+  grid-column-start: 1;
+  grid-column-end: 3;
+  justify-self: center;
+  align-self: center;
+}
+
+.error{
+  margin-bottom: 50px;
+}
+
+.heading{
+  color: inherit;
+  font-size: 21px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}

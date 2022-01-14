@@ -9,10 +9,16 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-# SECRET_KEY = 'django-insecure-l96b=n^ir24!a_h4i1$d&dvc6h6l3$#%px8_c+#pgx=yxo)=k^'
+
 
 from pathlib import Path
 import environ
+import dj_database_url
+import os
+import django_heroku
+
+
+
 
 env = environ.Env()
 environ.Env.read_env()
@@ -27,10 +33,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env("SECRET_KEY")
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = []
+
+ALLOWED_HOSTS = ['localhost','127.0.0.1','https://bcg-assignment-tamal.herokuapp.com','http://localhost:3000']
 
 
 # Application definition
@@ -44,6 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'api.apps.ApiConfig',
+    # 'corsheaders',
 ]
 
 SITE_ID = 1
@@ -51,6 +57,7 @@ SITE_ID = 1
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    # 'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -58,12 +65,22 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+
+# CORS_ALLOWED_ORIGINS = (
+#        'http://localhost:3000',
+# )
+
+# CORS_ALLOW_ALL_ORIGINS = True
+# CORS_ORIGIN_WHITELIST = 'http://localhost:3000',
+
 ROOT_URLCONF = 'server.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR,'react-app/build')
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -81,17 +98,22 @@ WSGI_APPLICATION = 'server.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
+DATABASES = {}
+DATABASES['default'] = dj_database_url.parse(env('DATABASE_URL'))
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': env('DBNAME'), #BASE_DIR / 'db.sqlite3',
-        'USER': env('DBUSER'),
-        'PASSWORD' :env('DBPASSWORD'),
-        'HOST' : env('DBHOST'),
-        'PORT': env('DBPORT')
-    }
-}
+
+
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'bcg_development', #BASE_DIR / 'db.sqlite3',
+#         'USER': 'postgres',
+#         'PASSWORD' : 'postgres',
+#         'HOST' : 'localhost',
+#         'PORT': 5433
+#     }
+# }
 
 
 # Password validation
@@ -127,12 +149,36 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.2/howto/static-files/
-
-STATIC_URL = '/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+## manually added
+
+
+# PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
+STATIC_ROOT = os.path.join(BASE_DIR, 'asset')
+
+
+# Activate Django-Heroku.
+
+if env('ENV') == 'development':
+    DEBUG = True
+    # del DATABASES['default']['OPTIONS']['sslmode']
+else:
+    DEBUG=False
+    django_heroku.settings(locals())
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/3.2/howto/static-files/
+
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+   os.path.join(BASE_DIR, 'static'),
+   os.path.join(BASE_DIR, 'react-app/build/static'),
+   ]
+
+

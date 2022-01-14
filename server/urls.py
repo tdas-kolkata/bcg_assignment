@@ -15,13 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+from django.views.generic import TemplateView
 
-
+# added custom admin brand
 admin.site.site_header = 'Global Insurance'                    # default: "Django Administration"
 # admin.site.index_title = 'Features area'                 # default: "Site administration"
 # admin.site.site_title = 'HTML title from adminsitration' # default: "Django site admin
 
 urlpatterns = [
+    path('',TemplateView.as_view(template_name='index.html')),
     path('admin/', admin.site.urls),
     path('api/',include('api.urls'))
 ]
