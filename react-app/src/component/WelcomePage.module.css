@@ -1,0 +1,7 @@
+.container{
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    row-gap: 20px;
+  /* column-gap: 20px; */
+}

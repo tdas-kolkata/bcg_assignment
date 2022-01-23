@@ -20,7 +20,7 @@ export default function SalesChart() {
       })
       .catch((err) => {
         console.log(err);
-        setError(err);
+        setError('Something went wrong');
       });
   };
 

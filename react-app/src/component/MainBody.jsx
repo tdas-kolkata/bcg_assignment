@@ -5,6 +5,7 @@ import AddUserForm from './AddUserForm'
 import AddPolicyForm from './AddPolicyForm'
 import EditPolicyFrom from "./EditPolicyFrom";
 import SalesChart from "./SalesChart";
+import WelcomePage from "./WelcomePage";
 
 export default function MainBody() {
   return (
@@ -16,6 +17,7 @@ export default function MainBody() {
         <Route path="/all_policies" element={<GridView/>}/>
         <Route path="/policy/:policy_id" element={<EditPolicyFrom/>}/>
         <Route path="/sales_view" element={<SalesChart/>}/>
+        <Route path="/" element={<WelcomePage/>}/>
       </Routes>
     </div>
   );
