@@ -128,7 +128,7 @@ def sales_data(request, region):
         rows = cursor.fetchall()
         sales_arr = [0]*12
         for month_no,policy_count in rows:
-            sales_arr[int(month_no)] = policy_count
+            sales_arr[int(month_no)-1] = policy_count
         print(sales_arr)
         jsonData = {}
         jsonData['sales_arr'] = sales_arr
