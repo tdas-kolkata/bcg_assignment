@@ -31,7 +31,8 @@ export default function EditPolicyFrom() {
     "collision":'Y',
     "comprehensive":'Y',
     "client__client_id":"",
-    "client__client_name":""
+    "client__client_name":"",
+    "date_of_purchase":""
   });
   const { policy_id } = useParams();
   const submitHandler = async (e) => {
@@ -72,7 +73,8 @@ export default function EditPolicyFrom() {
       "collision":unLoadBoolean(data.collision),
       "comprehensive":unLoadBoolean(data.comprehensive),
       "client__client_id":data.client__client_id,
-      "client__client_name":data.client__client_name
+      "client__client_name":data.client__client_name,
+      "date_of_purchase":data.date_of_purchase
     }
     console.log(state)
     setPolicy(state);
