@@ -13,7 +13,7 @@ export default function GridView() {
   const navigate = useNavigate();
 
   const fetchData = async () => {
-    const { data } = await axios.get("/api/policy/all", config);
+    const { data } = await axios.post("/api/policy/all", config);
     // console.log(data);
     setPolicies(data);
     setFilteredPolicies(data);

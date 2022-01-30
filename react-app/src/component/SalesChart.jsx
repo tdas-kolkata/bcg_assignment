@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Bar } from "react-chartjs-2";
 import axios from "axios";
 import "chart.js/auto";
@@ -23,6 +23,20 @@ export default function SalesChart() {
         setError('Something went wrong');
       });
   };
+
+  useEffect(()=>{
+    axios
+      .get(`/api/sales/all`)
+      .then((res) => {
+        console.log(res);
+        setSales(res.data.sales_arr);
+        setError("");
+      })
+      .catch((err) => {
+        console.log(err);
+        setError('Something went wrong');
+      });
+  },[]);
 
   return (
     <div style={{ width: "70%", margin: "15%", marginTop: "0px" }}>

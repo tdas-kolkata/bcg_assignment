@@ -119,12 +119,19 @@ def policy_details(request,policy_id):
 
 def sales_data(request, region):
     with connection.cursor() as cursor:
-        cursor.execute('''select  DATE_PART('month',a.date_of_purchase) as month,count(distinct a.policy_id)
-                        from public."api_policy" as a, public."api_client" as b
-                        where a.client_id = b.client_id
-                        and b.region = %s
-                        group by month
-                        order by month''',[region])
+        if region=='all':
+            cursor.execute('''select  DATE_PART('month',a.date_of_purchase) as month,count(distinct a.policy_id)
+                                        from public."api_policy" as a, public."api_client" as b
+                                        where a.client_id = b.client_id
+                                        group by month
+                                        order by month''')
+        else:
+            cursor.execute('''select  DATE_PART('month',a.date_of_purchase) as month,count(distinct a.policy_id)
+                            from public."api_policy" as a, public."api_client" as b
+                            where a.client_id = b.client_id
+                            and b.region = %s
+                            group by month
+                            order by month''',[region])
         rows = cursor.fetchall()
         sales_arr = [0]*12
         for month_no,policy_count in rows:

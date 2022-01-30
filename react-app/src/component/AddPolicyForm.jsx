@@ -9,7 +9,8 @@ export default function AddPolicyForm() {
   const submitHandler = async(e) => {
     e.preventDefault();
     try{
-      const res = await axios.post("/api/policy/add/", 
+        const a = 'tmal';
+      const res = await axios.post("/api/policy/add/",
       {
         "purchase_date":e.target.purchase_date.value,
         "fuel" :e.target.fuel.value,
@@ -81,7 +82,7 @@ export default function AddPolicyForm() {
         </select>
         <label htmlFor="customer_id">CUSTOMER ID</label>
         <input type="number" id="customer_id" name="customer_id"/>
-        
+
         <button onClick={() => {
             navigate("/add_user");
           }}>ADD USER</button>
